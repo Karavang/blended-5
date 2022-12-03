@@ -6,8 +6,25 @@
  */
 
  function greet() {
+
     return 'hello world';
 }
+   
+   function greet2() {
+   const promise = new Promise((resolve, reject) => {
+   setTimeout(() => {
+   resolve(greet);
+   },2000);
+});
+   
+   return promise;
+   }
+   
+   
+   greet2().then((res) =>{
+   console.log(res);
+   });
+   
 
 
 // =============================================
@@ -20,7 +37,30 @@
  * Если значение четное, решай промис и возвращай "even" через 1 секунду.
  * Если значение не четное, решай промис и возвращай "odd" через 2 секунды.
  */
+ const promt= prompt ('Введите какое-то значение');
 
+ function chackedValue(value) {
+ const promise = new Promise((resolve, reject) => {
+ console.log(Number(value) % 2 === 0);
+ console.log(value);
+ if (typeof Number(value) !== 'number') {
+ reject('error');
+ } else if (Number(value) % 2 === 0) {
+ setTimeout(() => {
+ resolve('even');
+ }, 1000);
+ } else {
+setTimeout(() => {
+ resolve('odd');
+}, 2000);
+ }
+ });
+ 
+ return promise;
+ 
+ }
+ 
+ chackedValue(promt).then(console.log).catch(console.error);
 
 // =============================================
 
@@ -53,7 +93,29 @@ const USER_DATA = {
  * Кнопка increment должна каждую секунду увеличивать значение на 1
  * Кнопка decrement должна каждую секунду уменьшать значение на 1
  */
+ let timer = null
+ let value = document.querySelector(".counter-value")
+ let inc = document.querySelector("[data-action='increment']");
+ let dis = document.querySelector("[data-action='decrement']");
+dis.addEventListener('click',function(){
+    clearInterval(timer)
+    timer =  setInterval(() => {
+let x = Number(value.textContent)
+value.textContent = x+1
+  }, 1000);
+})
+inc.addEventListener('click',function(){
+    clearInterval(timer)
+   timer =  setInterval(() => {
+    let x = Number(value.textContent)
+    value.textContent = x-1
+      }, 1000);
+     
+    }) 
+    
 
+
+ 
 
 // =============================================
 
